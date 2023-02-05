@@ -1,11 +1,15 @@
 package com.codingmatemoon.productorderserivce.product;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 public class ProductServiceTest {
 
-    private ProductSerive productService;
+    @Autowired
+    private ProductService productService;
+    /*
     private ProductPort productPort;
     private ProductRepository productRepository;
 
@@ -15,6 +19,8 @@ public class ProductServiceTest {
         productPort = new ProductAdapter(productRepository);
         productService = new ProductSerive(productPort);
     }
+
+     */
 
     @Test
     void 상품등록() {

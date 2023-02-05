@@ -1,9 +1,12 @@
 package com.codingmatemoon.productorderserivce.product;
 
-class ProductSerive {
+import org.springframework.stereotype.Component;
+
+@Component
+class ProductService {
     private final ProductPort productPort;
 
-    ProductSerive(ProductPort productPort) {
+    ProductService(ProductPort productPort) {
         this.productPort = productPort;
     }
 
