@@ -1,20 +1,15 @@
 package com.codingmatemoon.productorderserivce.product;
 
 import com.codingmatemoon.productorderserivce.ApiTest;
-import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-
-import java.awt.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductApiTest extends ApiTest {
+    private final ProductSteps productSteps = new ProductSteps();
 
 //    @Autowired
 //    private ProductService productService;
@@ -33,32 +28,22 @@ public class ProductApiTest extends ApiTest {
 
     @Test
     void 상품등록() {
-        final var request = 상품등록요청_생성();
+        final var request = productSteps.상품등록요청_생성();
 
         //productService.addProduct(request);
         //API 요청
         // 요청을 보내는 로그를 남깁니다
-        final var response = 상품등록요청(request);
+        final var response = productSteps.상품등록요청(request);
 
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
     }
 
-    private ExtractableResponse<Response> 상품등록요청(AddProductRequest request) {
-        return RestAssured.given().log().all()
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .body(request)
-                .when()
-                .post("/products")
-                .then()
-                .log().all().extract();
+    public ExtractableResponse<Response> 상품등록요청(final AddProductRequest request) {
+        return productSteps.상품등록요청(request);
     }
 
-    private AddProductRequest 상품등록요청_생성() {
-        final String name = "상품명";
-        final int price = 1000;
-        final DiscountPolicy discountPolicy = DiscountPolicy.NONE;
-        final AddProductRequest request = new AddProductRequest(name, price, discountPolicy);
-        return request;
+    public AddProductRequest 상품등록요청_생성() {
+        return productSteps.상품등록요청_생성();
     }
 
 
