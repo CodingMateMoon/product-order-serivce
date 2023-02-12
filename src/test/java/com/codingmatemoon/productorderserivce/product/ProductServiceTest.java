@@ -7,13 +7,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
+//@SpringBootTest
 // 서비스->포트-> Adapter-> Repository 호출 플로우를 위해 POJO 클래스를 만들었는데 간단한 상품 조회는 처음부터 SpringBootTest로 해도 괜찮습니다
 public class ProductServiceTest {
 
     @Autowired
     private ProductService productService;
 
+    /*
     @Test
     @DisplayName("상품조회")
     public void 상품조회() throws Exception{
@@ -27,5 +28,5 @@ public class ProductServiceTest {
         // 상품의 응답을 검증. 검증부 먼저 작성
         assertThat(response).isNotNull();
     }
-
+    */
 }

@@ -1,8 +1,10 @@
 package com.codingmatemoon.productorderserivce.product;
 
 import com.codingmatemoon.productorderserivce.ApiTest;
+import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
@@ -46,5 +48,21 @@ public class ProductApiTest extends ApiTest {
         return productSteps.상품등록요청_생성();
     }
 
+    @Test
+    @DisplayName("상품조회")
+    public void 상품조회() throws Exception{
+        productSteps.상품등록요청(productSteps.상품등록요청_생성());
+        Long productId = 1L;
+
+        final ExtractableResponse<Response> response = RestAssured.given().log().all()
+                .when()
+                .get("/products/{productId}", productId)
+                .then().log().all()
+                .extract();
+
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat(response.jsonPath().getString("name")).isEqualTo("상품명");
+    }
+    
 
 }
